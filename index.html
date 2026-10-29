@@ -126,6 +126,12 @@
     text-transform: uppercase; color: rgba(255,255,255,0.85); line-height: 1.5;
   }
 
+  .hero-photo { position: relative; padding: 0 24px 72px; }
+  .hero-photo img {
+    display: block; width: 100%; height: auto; max-height: 560px; object-fit: cover;
+    border-radius: 28px; border: 1px solid rgba(255,255,255,0.12);
+  }
+
   .strip {
     border-top: 1px solid rgba(255,255,255,0.1);
   }
@@ -174,8 +180,14 @@
     transition: transform 0.5s cubic-bezier(0.22,0.61,0.36,1), box-shadow 0.5s;
   }
   .card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -15px rgba(0,0,0,0.12); }
+  .card .photo {
+    display: block; width: calc(100% + 56px); margin: -28px -28px 0;
+    aspect-ratio: 16 / 10; object-fit: cover; background: #e5e5e5;
+  }
+  .card .body { position: relative; }
+  .card .body .icon { margin-top: -28px; border: 4px solid #fff; box-sizing: content-box; }
   .card .num {
-    position: absolute; top: 6px; right: 20px;
+    position: absolute; top: 6px; right: -8px;
     font-size: 92px; font-weight: 900; color: rgba(0,0,0,0.04);
     letter-spacing: -0.05em; pointer-events: none;
   }
@@ -309,9 +321,18 @@
     nav.primary button { padding: 9px 10px; font-size: 11px; letter-spacing: 0.12em; }
     .brand-logo { height: 32px; }
     .hero .grid { grid-template-columns: 1fr; padding: 64px 24px 48px; }
+    .hero-photo { padding-bottom: 48px; }
+    .hero-photo img { border-radius: 18px; }
     .promises { border-left: 0; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.14); padding-top: 24px; }
     #tjanster { padding: 56px 24px 16px; }
     .services-grid { padding: 24px 24px 64px; }
+  }
+  @media (max-width: 560px) {
+    header.site .inner { height: auto; flex-wrap: wrap; padding: 10px 16px 6px; row-gap: 4px; }
+    .brand-logo { height: 28px; }
+    .lang-toggle { margin-left: auto; }
+    nav.primary { order: 3; width: 100%; margin-left: 0; justify-content: center; }
+    .services-grid { grid-template-columns: minmax(0, 1fr); }
   }
 </style>
 </head>
