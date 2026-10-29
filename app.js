@@ -28,19 +28,19 @@ function svg(key, size = 26, stroke = 1.5) {
 }
 
 const SERVICES = [
-  { key: "truck", num: "01",
+  { key: "truck", photo: "assets/photos/transport.jpg", num: "01",
     sv: { title: "Transport & leveranser", items: ["Företagsleveranser", "Hemleverans", "Tidsbokade leveranser", "Specialtransporter"] },
     en: { title: "Transport & deliveries", items: ["Business deliveries", "Home delivery", "Scheduled deliveries", "Special transports"] } },
-  { key: "washer", num: "02",
+  { key: "washer", photo: "assets/photos/installation.jpg", num: "02",
     sv: { title: "Installation av vitvaror", items: ["Kök och hushållsprodukter", "Professionell installation", "Bortforsling av gammal produkt", "Rådgivning och genomgång"] },
     en: { title: "Appliance installation", items: ["Kitchen and household appliances", "Professional installation", "Removal of the old unit", "Advice and walkthrough"] } },
-  { key: "zap", num: "03",
+  { key: "zap", photo: "assets/photos/el.jpg", num: "03",
     sv: { title: "El-arbeten lågspänning", items: ["Installation och inkoppling", "Eluttag, belysning, vitvaror", "Felsökning och utbyte", "Enligt gällande regler"] },
     en: { title: "Low-voltage electrical work", items: ["Installation and connection", "Sockets, lighting, appliances", "Fault finding and replacement", "According to current regulations"] } },
-  { key: "water", num: "04",
+  { key: "water", photo: "assets/photos/vvs.jpg", num: "04",
     sv: { title: "VVS-arbeten", items: ["Installation och anslutning", "Vatten och avlopp", "Diskmaskin, tvättmaskin m.m.", "Service och felsökning"] },
     en: { title: "Plumbing work", items: ["Installation and connection", "Water and drainage", "Dishwasher, washing machine etc.", "Service and fault finding"] } },
-  { key: "home", num: "05",
+  { key: "home", photo: "assets/photos/flytt.jpg", num: "05",
     sv: { title: "Flytt & övriga tjänster", items: ["Flytt och transport", "Bärhjälp", "Montering", "Skräphantering"] },
     en: { title: "Moving & other services", items: ["Moving and transport", "Carrying help", "Assembly", "Waste handling"] } }
 ];
@@ -58,6 +58,7 @@ const COPY = {
     heroSub: ["VI SKAPAR", "LÖSNINGAR"],
     heroTagline: ["För företag och privatpersoner", "idag, imorgon och framåt."],
     lineChips: ["Transport", "Installation", "Service"],
+    heroPhotoAlt: "LG Express-lastbil och personal som levererar till kund",
     v0: "Därför LG Express",
     v1: "Tryggt samarbete", v2: "Professionell service",
     v3: "Erfaren personal", v4: "Hållbara lösningar",
@@ -101,6 +102,7 @@ const COPY = {
     heroSub: ["WE BUILD", "SOLUTIONS"],
     heroTagline: ["For businesses and private customers", "today, tomorrow and onward."],
     lineChips: ["Transport", "Installation", "Service"],
+    heroPhotoAlt: "LG Express truck and crew delivering to a customer",
     v0: "Why LG Express",
     v1: "Reliable partnership", v2: "Professional service",
     v3: "Experienced staff", v4: "Sustainable solutions",
@@ -165,6 +167,7 @@ function renderNav(t) {
 function renderHome(t) {
   const services = SERVICES.map(s => ({
     num: s.num,
+    photo: s.photo,
     icon: svg(s.key, 26),
     title: s[state.lang].title,
     items: s[state.lang].items
@@ -191,6 +194,9 @@ function renderHome(t) {
         ${t.promises.map(p => `<div>${esc(p)}</div>`).join('')}
       </div>
     </div>
+    <div class="wrap hero-photo">
+      <img src="assets/photos/transport.jpg" width="1018" height="528" alt="${esc(t.heroPhotoAlt)}">
+    </div>
     <div class="strip"><div class="wrap inner">${t.strip.map((s, i) => `<span>${esc(s)}</span>${i < t.strip.length - 1 ? '<span>•</span>' : ''}`).join('')}</div></div>
   </section>
 
@@ -212,13 +218,16 @@ function renderHome(t) {
   <section class="wrap services-grid">
     ${services.map(s => `
       <div class="card">
-        <div class="num">${esc(s.num)}</div>
-        <div class="icon">${s.icon}</div>
-        <h3>${esc(s.title)}</h3>
-        <div class="rule"></div>
-        <ul>
-          ${s.items.map(it => `<li><span class="dash">—</span><span>${esc(it)}</span></li>`).join('')}
-        </ul>
+        <img class="photo" src="${s.photo}" alt="${esc(s.title)}" loading="lazy">
+        <div class="body">
+          <div class="num">${esc(s.num)}</div>
+          <div class="icon">${s.icon}</div>
+          <h3>${esc(s.title)}</h3>
+          <div class="rule"></div>
+          <ul>
+            ${s.items.map(it => `<li><span class="dash">—</span><span>${esc(it)}</span></li>`).join('')}
+          </ul>
+        </div>
       </div>
     `).join('')}
   </section>
